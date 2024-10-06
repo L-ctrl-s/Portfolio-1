@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品集展示</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Helvetica&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Han+Sans&display=swap" rel="stylesheet">
+    <style>
+        /* 全局样式 */
+        body {
+            margin: 0;
+            overflow: hidden; /* 隐藏滚动条 */
+            font-family: 'Helvetica', sans-serif; /* 英文内文字体 */
+        }
+
+        /* 页面样式 */
+        .page {
+            width: 100vw;
+            height: 100vh;
+            position: absolute; /* 绝对定位 */
+            transition: transform 0.5s ease; /* 平滑过渡效果 */
+        }
+
+        /* 视频样式 */
+        .background-video {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            z-index: -1; /* 在背景 */
+        }
+
+        /* LOGO样式 */
+        .logo {
+            width: 200px;
+            height: auto;
+            position: fixed; /* 固定位置 */
+            top: 16px;
+            left: 16px;
+            z-index: 1; /* 确保在最上层 */
+        }
+
+        /* 汉堡图标样式 */
+        .hamburger {
+            position: fixed; /* 固定位置 */
+            top: 32px;
+            right: 56px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 20px;
+            cursor: pointer;
+            z-index: 1; /* 确保在最上层 */
+            transition: transform 0.2s; /* 动画效果 */
+        }
+
+        /* 汉堡条样式 */
+        .hamburger div {
+            background-color: white;
+            transition: all 0.2s; /* 动画效果 */
+        }
+
+        /* 长条样式 */
+        .long-bar {
+            height: 4px;
+            width: 32px;
+        }
+
+        /* 一级导航容器样式 */
+        .dropdown {
+            position: fixed; /* 固定位置 */
+            top: 56px;
+            right: 48px;
+            width: 168px;
+            height: 864px;
+            display: none;
+            flex-direction: column;
+            background-color: rgba(0, 0, 0, 0.367);
+            transition: transform 0.2s ease;
+            transform: translateY(-20px);
+        }
+
+        /* 二级选项容器样式 */
+        .dropdown-item {
+            width: 168px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            padding-left: 42px;
+            color: rgba(255, 255, 255, 0.7); /* 未选中状态 */
+            font-size: 14px; /* 未选中状态字号 */
+            font-weight: 100; /* 未选中状态粗细 */
+            cursor: pointer;
+            margin-bottom: 10px;
+            margin-top: 48px;
+            transition: all 0.2s ease; /* 动画效果 */
+            font-family: 'Oswald', sans-serif; /* 英文标题字体 */
+        }
+
+        /* 悬浮状态 */
+        .dropdown-item:hover {
+            font-size: 16px; /* 悬浮状态字号 */
+            color: rgba(255, 255, 255, 1); /* 悬浮状态色值 */
+            font-weight: 100; /* 悬浮状态粗细 */
+        }
+
+        /* 点击状态 */
+        .dropdown-item:active {
+            font-size: 12px; /* 点击状态字号 */
+            color: rgba(255, 255, 255, 1); /* 点击状态色值 */
+            font-weight: 100; /* 点击状态粗细 */
+        }
+
+        /* 选中状态 */
+        .dropdown-item.selected {
+            font-size: 16px; /* 选中状态字号 */
+            color: rgba(255, 255, 255, 1); /* 选中状态色值 */
+            font-weight: 700; /* 选中状态粗细 */
+        }
+
+        /* 中文字体设置 */
+        .dropdown-item {
+            font-family: 'Source Han Sans', sans-serif; /* 中文字体 */
+        }
+
+        /* 第二页样式 */
+        .second-page {
+            background-image: url('file:///L:/qianduanxuexi/images/image.png'); /* 背景图片 */
+            background-size: cover; /* 背景图片覆盖 */
+            background-position: center; /* 居中 */
+            height: 100vh; /* 高度为视口高度 */
+        }
+    </style>
+</head>
+<body>
+    <img src="file:///L:/qianduanxuexi/images/logo.svg" alt="LOGO" class="logo"> <!-- LOGO图片 -->
+    <div class="hamburger" onmouseover="showMenu()" onmouseout="hideMenu()"> <!-- 汉堡图标 -->
+        <div class="long-bar"></div>
+        <div class="long-bar"></div>
+        <div class="long-bar"></div>
+    </div>
+
+    <div class="page" id="firstPage">
+        <video class="background-video" autoplay loop muted>
+            <source src="https://cdn.pixabay.com/video/2021/05/25/75157-562965610_large.mp4" type="video/mp4"> <!-- 视频 -->
+            您的浏览器不支持视频标签。
+        </video>
+    </div>
+    
+        
+        <div class="dropdown" id="menu" onmouseover="showMenu()" onmouseout="hideMenu()"> <!-- 一级导航容器 -->
+            <div class="dropdown-item" onclick="selectItem(this)">首页概览</div>
+            <div class="dropdown-item" onclick="selectItem(this)">APP小程序</div>
+            <div class="dropdown-item" onclick="selectItem(this)">品牌电商</div>
+            <div class="dropdown-item" onclick="selectItem(this)">管理系统</div>
+            <div class="dropdown-item" onclick="selectItem(this)">数据大屏</div>
+            <div class="dropdown-item" onclick="selectItem(this)">剪辑&动效</div>
+            <div class="dropdown-item" onclick="selectItem(this)">插画&三维</div>
+            <div class="dropdown-item" onclick="selectItem(this)">运营设计</div>
+        </div>
+    </div>
+
+    <div class="page second-page" id="secondPage" style="transform: translateY(100vh);"> <!-- 第二页 -->
+        <!-- 这里不需要额外的内容 -->
+    </div>
+
+    <script>
+        let menuTimeout; // 用于存储定时器
+        let currentPage = 1; // 当前页面
+
+        // 显示菜单
+        function showMenu() {
+            clearTimeout(menuTimeout);
+            const menu = document.getElementById('menu');
+            menu.style.display = 'flex';
+            menu.style.opacity = '1';
+            menu.style.transform = 'translateY(0)';
+        }
+
+        // 隐藏菜单
+        function hideMenu() {
+            const menu = document.getElementById('menu');
+            menu.style.opacity = '0';
+            menu.style.transform = 'translateY(-20px)';
+            menuTimeout = setTimeout(() => {
+                menu.style.display = 'none';
+            }, 100);
+        }
+
+        // 选中菜单项
+        function selectItem(selected) {
+            const items = document.querySelectorAll('.dropdown-item');
+            items.forEach(item => {
+                item.classList.remove('selected');
+            });
+            selected.classList.add('selected');
+        }
+
+        // 监听鼠标滚动事件
+        window.addEventListener('wheel', function(event) {
+            if (event.deltaY > 0 && currentPage === 1) {
+                currentPage = 2; // 切换到第二页
+                document.getElementById('firstPage').style.transform = 'translateY(-100vh)'; // 隐藏第一页
+                document.getElementById('secondPage').style.transform = 'translateY(0)'; // 显示第二页
+            } else if (event.deltaY < 0 && currentPage === 2) {
+                currentPage = 1; // 切换到第一页
+                document.getElementById('firstPage').style.transform = 'translateY(0)'; // 显示第一页
+                document.getElementById('secondPage').style.transform = 'translateY(100vh)'; // 隐藏第二页
+            }
+            event.preventDefault(); // 防止默认滚动
+        });
+    </script>
+</body>
+</html>
